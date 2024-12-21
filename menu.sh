@@ -1,31 +1,39 @@
 #!/bin/bash
 
+# URL base do repositório no GitHub
+GITHUB_BASE_URL="https://raw.githubusercontent.com/lucfll/zoneminder/main"
+
 # Função para exibir o menu
 exibir_menu() {
     echo "=================================="
     echo "        MENU DE INSTALAÇÃO        "
     echo "=================================="
     echo "1. Instalar ZoneMinder"
-    echo "2. Outro Script (placeholder)"
+    echo "2. Instalar outro script (placeholder)"
     echo "3. Sair"
     echo "=================================="
 }
 
 # Função para instalar o ZoneMinder
 instalar_zoneminder() {
-    echo "Executando o script de instalação do ZoneMinder..."
-    # Certifique-se de que o script `install_zoneminder.sh` está no mesmo diretório e tem permissões de execução.
-    if [[ -f "install_zoneminder.sh" ]]; then
-        chmod +x install_zoneminder.sh
-        ./install_zoneminder.sh
+    echo "Baixando e executando o script de instalação do ZoneMinder..."
+    SCRIPT_URL="$GITHUB_BASE_URL/install_zoneminder.sh"
+    if curl --output /dev/null --silent --head --fail "$SCRIPT_URL"; then
+        bash <(curl -sSL "$SCRIPT_URL")
     else
-        echo "Erro: O script install_zoneminder.sh não foi encontrado!"
+        echo "Erro: O script de instalação do ZoneMinder não foi encontrado no GitHub!"
     fi
 }
 
 # Função para outro script (placeholder)
 outro_script() {
-    echo "Opção de outro script em construção..."
+    echo "Baixando e executando outro script (placeholder)..."
+    SCRIPT_URL="$GITHUB_BASE_URL/outro_script.sh"
+    if curl --output /dev/null --silent --head --fail "$SCRIPT_URL"; then
+        bash <(curl -sSL "$SCRIPT_URL")
+    else
+        echo "Erro: O script não foi encontrado no GitHub!"
+    fi
 }
 
 # Loop principal do menu
@@ -49,4 +57,3 @@ while true; do
             ;;
     esac
 done
-
