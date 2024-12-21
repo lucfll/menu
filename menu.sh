@@ -5,7 +5,7 @@ exibir_menu() {
     echo "=================================="
     echo "        MENU DE INSTALAÇÃO        "
     echo "=================================="
-    echo "1. Instalar ZoneMinder"
+    echo "1. Instalar ZoneMinder Ubuntu 22.04"
     echo "2. Instalar outro script (placeholder)"
     echo "3. Sair"
     echo "=================================="
