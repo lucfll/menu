@@ -1,3 +1,4 @@
+#https://chatgpt.com/c/676bf699-f0e0-8003-8786-5a4d67ad0142
 #!/bin/bash
 
 # Função para exibir o menu principal
