@@ -1,5 +1,6 @@
 #https://chatgpt.com/c/676bf699-f0e0-8003-8786-5a4d67ad0142
 #!/bin/bash
+
 # Função para exibir o menu principal
 exibir_menu_principal() {
     # Definindo cores
@@ -22,6 +23,46 @@ exibir_menu_principal() {
     echo -e "${CYAN}==================================${RESET}"
 }
 
+# Função para exibir o menu de CFTV
+exibir_menu_cftv() {
+    echo -e "${CYAN}==================================${RESET}"
+    echo -e "${GREEN}        MENU CFTV                ${RESET}"
+    echo -e "${CYAN}==================================${RESET}"
+    echo -e "${YELLOW}1.${RESET} ${BLUE}Instalar ZoneMinder Ubuntu 22.04${RESET}"
+    echo -e "${YELLOW}2.${RESET} ${BLUE}Voltar${RESET}"
+    echo -e "${CYAN}==================================${RESET}"
+}
+
+# Função para exibir o menu de Redes
+exibir_menu_redes() {
+    echo -e "${CYAN}==================================${RESET}"
+    echo -e "${GREEN}        MENU REDES               ${RESET}"
+    echo -e "${CYAN}==================================${RESET}"
+    echo -e "${YELLOW}1.${RESET} ${BLUE}Criar rede em modo bridge${RESET}"
+    echo -e "${YELLOW}2.${RESET} ${BLUE}Voltar${RESET}"
+    echo -e "${CYAN}==================================${RESET}"
+}
+
+# Função para exibir o menu de Virtualização
+exibir_menu_virtualizacao() {
+    echo -e "${CYAN}==================================${RESET}"
+    echo -e "${GREEN}        MENU VIRTUALIZAÇÃO       ${RESET}"
+    echo -e "${CYAN}==================================${RESET}"
+    echo -e "${YELLOW}1.${RESET} ${BLUE}Instalar VirtManager${RESET}"
+    echo -e "${YELLOW}2.${RESET} ${BLUE}Voltar${RESET}"
+    echo -e "${CYAN}==================================${RESET}"
+}
+
+# Função para exibir o menu de DNS
+exibir_menu_dns() {
+    echo -e "${CYAN}==================================${RESET}"
+    echo -e "${GREEN}        MENU DNS                 ${RESET}"
+    echo -e "${CYAN}==================================${RESET}"
+    echo -e "${YELLOW}1.${RESET} ${BLUE}Instalar Unbound${RESET}"
+    echo -e "${YELLOW}2.${RESET} ${BLUE}Voltar${RESET}"
+    echo -e "${CYAN}==================================${RESET}"
+}
+
 # Função para exibir o menu de SSH Reverso
 exibir_menu_ssh_reverso() {
     echo -e "${CYAN}==================================${RESET}"
@@ -30,20 +71,6 @@ exibir_menu_ssh_reverso() {
     echo -e "${YELLOW}1.${RESET} ${BLUE}Instalar SSH Reverso${RESET}"
     echo -e "${YELLOW}2.${RESET} ${BLUE}Voltar${RESET}"
     echo -e "${CYAN}==================================${RESET}"
-}
-
-# Função para instalar o SSH Reverso
-instalar_ssh_reverso() {
-    echo "Baixando e executando o script SSH Reverso..."
-    local url="https://raw.githubusercontent.com/lucfll/ssh_reverso/refs/heads/main/sshreverso.sh"
-    local script_temp="sshreverso.sh"
-    if curl -sSL "$url" -o "$script_temp"; then
-        chmod +x "$script_temp"
-        ./"$script_temp"
-        rm -f "$script_temp"
-    else
-        echo "Erro: Não foi possível baixar o script SSH Reverso!"
-    fi
 }
 
 # Função para instalar o ZoneMinder
@@ -102,6 +129,20 @@ instalar_unbound() {
     fi
 }
 
+# Função para instalar o SSH Reverso
+instalar_ssh_reverso() {
+    echo "Baixando e executando o script SSH Reverso..."
+    local url="https://raw.githubusercontent.com/lucfll/ssh_reverso/refs/heads/main/sshreverso.sh"
+    local script_temp="sshreverso.sh"
+    if curl -sSL "$url" -o "$script_temp"; then
+        chmod +x "$script_temp"
+        ./"$script_temp"
+        rm -f "$script_temp"
+    else
+        echo "Erro: Não foi possível baixar o script SSH Reverso!"
+    fi
+}
+
 # Loop principal do menu
 while true; do
     exibir_menu_principal
@@ -109,16 +150,72 @@ while true; do
 
     case $opcao_principal in
         1)
-            # Código para o menu CFTV (já implementado)
+            while true; do
+                exibir_menu_cftv
+                read -p "Escolha uma opção: " opcao_cftv
+                case $opcao_cftv in
+                    1)
+                        instalar_zoneminder
+                        ;;
+                    2)
+                        break
+                        ;;
+                    *)
+                        echo "Opção inválida! Volte para o menu CFTV."
+                        ;;
+                esac
+            done
             ;;
         2)
-            # Código para o menu Redes (já implementado)
+            while true; do
+                exibir_menu_redes
+                read -p "Escolha uma opção: " opcao_redes
+                case $opcao_redes in
+                    1)
+                        criar_rede_bridge
+                        ;;
+                    2)
+                        break
+                        ;;
+                    *)
+                        echo "Opção inválida! Volte para o menu Redes."
+                        ;;
+                esac
+            done
             ;;
         3)
-            # Código para o menu Virtualização (já implementado)
+            while true; do
+                exibir_menu_virtualizacao
+                read -p "Escolha uma opção: " opcao_virtualizacao
+                case $opcao_virtualizacao in
+                    1)
+                        instalar_virtmanager
+                        ;;
+                    2)
+                        break
+                        ;;
+                    *)
+                        echo "Opção inválida! Volte para o menu Virtualização."
+                        ;;
+                esac
+            done
             ;;
         4)
-            # Código para o menu DNS (já implementado)
+            while true; do
+                exibir_menu_dns
+                read -p "Escolha uma opção: " opcao_dns
+                case $opcao_dns in
+                    1)
+                        instalar_unbound
+                        ;;
+                    2)
+                        break
+                        ;;
+                    *)
+                        echo "Opção inválida! Volte para o menu DNS."
+                        ;;
+                esac
+            done
             ;;
         5)
             while true; do
